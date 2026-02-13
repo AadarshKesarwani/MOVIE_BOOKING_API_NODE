@@ -19,6 +19,12 @@ router.delete('/:id',
     movieController.deleteMovie);
 
 
+router.put('/:id',
+    movieMiddleware.validateMovieUpdateRequest,
+    movieController.updateMovie);
+        
+
+
 
 
 

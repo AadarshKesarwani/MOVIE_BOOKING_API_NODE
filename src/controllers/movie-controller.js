@@ -58,6 +58,40 @@ const getMovie = async (req, res) => {
   }
 };
 
+
+const updateMovie = async (req, res) => {
+  try {
+    const response = await movieService.updateMovie(
+      req.params.id,
+      req.body
+    );
+
+    if (response.err) {
+      return res.status(response.statusCode || 404).json({
+        success: false,
+        data: {},
+        err: response.err,
+        message: "Failed to update movie",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: response,
+      err: {},
+      message: "Movie updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: {},
+      err: error,
+      message: "Internal server error",
+    });
+  }
+};
+
+
 const deleteMovie = async (req, res) => {
   try {
     const response = await movieService.deleteMovie(req.params.id);
@@ -90,5 +124,6 @@ const deleteMovie = async (req, res) => {
 module.exports = {
   createMovie,
   getMovie,
+  updateMovie,
   deleteMovie,
 };
