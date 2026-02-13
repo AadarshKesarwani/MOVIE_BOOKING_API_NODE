@@ -2,16 +2,25 @@ const express = require("express");
 const app = express();
 const { serverConfig,connectDB } = require("./config");
 const PORT = serverConfig.PORT;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/movie_db";
 const dotenv = require('dotenv');
-
 dotenv.config();
 
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
+
+
+
+const movieRoutes = require('./routes/movie.routes');
+
+
+
+
+
+app.use('/mba/api/v1/movies', movieRoutes);
 
 
 
